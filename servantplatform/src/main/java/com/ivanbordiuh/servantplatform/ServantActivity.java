@@ -22,12 +22,9 @@ public class ServantActivity extends AppCompatActivity {
     private ActivityComponent activityComponent;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         initializeDagger();
-        if (localBroadcastManager != null) {
-            Log.d("OLOLO", "OBANA");
-        }
     }
 
     private void initializeDagger() {
