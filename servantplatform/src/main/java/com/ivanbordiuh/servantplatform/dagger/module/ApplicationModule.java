@@ -2,7 +2,8 @@ package com.ivanbordiuh.servantplatform.dagger.module;
 
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.ivanbordiuh.servantplatform.ServantPlatformApplication;
+import com.ivanbordiuh.servantplatform.servant.ServantPlatformApplication;
+import com.ivanbordiuh.servantplatform.configuration.plugin.PluginResolver;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,5 +22,10 @@ public class ApplicationModule {
     @Provides
     LocalBroadcastManager provideLocalBroadcastManager() {
         return LocalBroadcastManager.getInstance(servantApplication);
+    }
+
+    @Provides
+    PluginResolver providePluginResolver() {
+        return new PluginResolver(servantApplication);
     }
 }

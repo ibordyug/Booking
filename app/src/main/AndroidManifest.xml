@@ -3,7 +3,7 @@
     package="com.ivanbordiuh.booking">
 
     <application
-        android:name="com.ivanbordiuh.servantplatform.ServantPlatformApplication"
+        android:name="com.ivanbordiuh.servantplatform.servant.ServantPlatformApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

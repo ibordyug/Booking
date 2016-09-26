@@ -1,6 +1,6 @@
 package com.ivanbordiuh.servantplatform.dagger.module;
 
-import com.ivanbordiuh.servantplatform.ServantActivity;
+import com.ivanbordiuh.servantplatform.servant.ServantActivity;
 
 import dagger.Module;
 
