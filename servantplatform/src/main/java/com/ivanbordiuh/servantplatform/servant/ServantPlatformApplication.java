@@ -11,9 +11,7 @@ import com.ivanbordiuh.servantplatform.dagger.module.ApplicationModule;
 
 import javax.inject.Inject;
 
-/**
- * Created by Ivan.Bordiuh on 07.06.2016.
- */
+
 public class ServantPlatformApplication extends Application {
     private ApplicationComponent applicationComponent;
 

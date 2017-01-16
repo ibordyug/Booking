@@ -1,23 +1,21 @@
 package com.ivanbordiuh.servantplatform.configuration.plugin;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.ivanbordiuh.servantplatform.configuration.configuration.FragmentConfiguration;
+import com.ivanbordiuh.servantplatform.configuration.configuration.ServantActivityConfiguration;
+import com.ivanbordiuh.servantplatform.configuration.configuration.ServantFragmentConfiguration;
 import com.ivanbordiuh.servantplatform.configuration.util.DomainType;
-import com.ivanbordiuh.servantplatform.servant.ServantActivity;
-import com.ivanbordiuh.servantplatform.servant.ServantFragment;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Ivan.Bordiuh on 19.06.2016.
- */
 public class PluginResolver {
+    private final String LOG_TAG = PluginResolver.class.getSimpleName();
     //TODO replace with inject
     Context context;
-    Map<Class<? extends ServantActivity>, Integer> activityConfigurationMap = new HashMap<>();
-    Map<DomainType, FragmentConfiguration> fragmentConfigurationMap = new HashMap<>();
+    Map<DomainType, Class<? extends ServantActivityConfiguration>> activityConfigurationMap = new HashMap<>();
+    Map<DomainType, Class<? extends ServantFragmentConfiguration>> fragmentConfigurationMap = new HashMap<>();
 
     public PluginResolver(Context context) {
         this.context = context;
@@ -27,17 +25,22 @@ public class PluginResolver {
         new PluginHelper(context).loadPlugins();
     }
 
-    public PluginResolver addActivityConfiguration(Class<? extends ServantActivity> activityClass, int layoutId) {
+    public PluginResolver addActivityConfiguration(DomainType domainType, Class<? extends ServantActivityConfiguration> activityConfiguration) {
+        activityConfigurationMap.put(domainType, activityConfiguration);
         return this;
     }
 
-    public PluginResolver addFragmentConfiguration(Class<? extends ServantFragment> fragmentClass, int layoutId, int parentId, DomainType... domainTypes) {
-        FragmentConfiguration fragmentConfiguration = new FragmentConfiguration();
-        fragmentConfiguration.setFragment(fragmentClass);
-        fragmentConfiguration.setLayout(layoutId);
-        fragmentConfiguration.setParentId(parentId);
-        fragmentConfiguration.setDomainType(domainTypes);
-        fragmentConfigurationMap.put(domainTypes[0], fragmentConfiguration);
+    public PluginResolver addFragmentConfiguration(DomainType domainType, Class<? extends ServantFragmentConfiguration> fragmantConfiguration) {
+        fragmentConfigurationMap.put(domainType, fragmantConfiguration);
         return this;
+    }
+
+    public ServantActivityConfiguration getEntryPointActivityConfiguration() {
+        try {
+            return activityConfigurationMap.get(DomainType.ENTRY_POINT).newInstance();
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Can't get entry point configuration " + e.toString());
+            return null;
+        }
     }
 }

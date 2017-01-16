@@ -27,7 +27,7 @@ public class MainActivity extends ServantActivity {
     private class PluginsAreLoadedReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            startActivity(new Intent(MainActivity.this, ServantActivity.class));
+            startActivity(new Intent(MainActivity.this, pluginResolver.getEntryPointActivityConfiguration().getActivityClass()));
         }
     }
 }

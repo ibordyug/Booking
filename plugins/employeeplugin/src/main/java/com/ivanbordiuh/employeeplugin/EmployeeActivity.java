@@ -1,9 +1,14 @@
 package com.ivanbordiuh.employeeplugin;
 
+import android.os.Bundle;
+
 import com.ivanbordiuh.servantplatform.servant.ServantActivity;
 
-/**
- * Created by Ivan.Bordiuh on 20.06.2016.
- */
 public class EmployeeActivity extends ServantActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_empoyee_plugin);
+    }
 }
